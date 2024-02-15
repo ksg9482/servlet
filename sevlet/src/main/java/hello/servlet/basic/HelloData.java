@@ -1,4 +1,4 @@
-package hello.sevlet.basic;
+package hello.servlet.basic;
 
 import lombok.Getter;
 import lombok.Setter;
