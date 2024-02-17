@@ -25,3 +25,4 @@
     <Li>age=<%=member.getAge()%></li>
 </ul>
 </body>
+</html>
