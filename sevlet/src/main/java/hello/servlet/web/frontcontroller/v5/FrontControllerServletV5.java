@@ -2,11 +2,13 @@ package hello.servlet.web.frontcontroller.v5;
 
 import hello.servlet.web.frontcontroller.ModelView;
 import hello.servlet.web.frontcontroller.MyView;
-import hello.servlet.web.frontcontroller.v3.ControllerV3;
 import hello.servlet.web.frontcontroller.v3.controller.MemberFormControllerV3;
 import hello.servlet.web.frontcontroller.v3.controller.MemberListControllerV3;
 import hello.servlet.web.frontcontroller.v3.controller.MemberSaveControllerV3;
-import hello.servlet.web.frontcontroller.v5.adapter.ContorollerV3HandlerAdapter;
+import hello.servlet.web.frontcontroller.v4.controller.MemberFormControllerV4;
+import hello.servlet.web.frontcontroller.v4.controller.MemberListControllerV4;
+import hello.servlet.web.frontcontroller.v4.controller.MemberSaveControllerV4;
+import hello.servlet.web.frontcontroller.v5.adapter.ControllerV3HandlerAdapter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -30,14 +32,21 @@ public class FrontControllerServletV5 extends HttpServlet {
     }
 
     public void initHandlerMappingMap() {
-        //프론트 컨트롤러 인스턴스 생성시 경로를 미리 넣어둠
+        //v3
         handleMappingMap.put("/front-controller/v5/v3/members/new-form", new MemberFormControllerV3());
         handleMappingMap.put("/front-controller/v5/v3/members/save", new MemberSaveControllerV3());
         handleMappingMap.put("/front-controller/v5/v3/members", new MemberListControllerV3());
+
+        //v4
+        handleMappingMap.put("/front-controller/v5/v4/members/new-form", new MemberFormControllerV4());
+        handleMappingMap.put("/front-controller/v5/v4/members/save", new MemberSaveControllerV4());
+        handleMappingMap.put("/front-controller/v5/v4/members", new MemberListControllerV4());
+
     }
 
     private void initHandlerAdapters() {
-        handlerAdapters.add(new ContorollerV3HandlerAdapter());
+
+        handlerAdapters.add(new ControllerV3HandlerAdapter());
     }
 
     @Override
@@ -64,6 +73,7 @@ public class FrontControllerServletV5 extends HttpServlet {
     }
 
     private MyHandlerAdapter getHandlerAdapter(Object handler) {
+        //호출이 오면 조건 맞는 거 나올때까지 각 어뎁터 support에 넣어서 검사. 확장 쉬워짐
         for (MyHandlerAdapter adapter : handlerAdapters) {
             if(adapter.supports(handler)) {
                 return adapter;

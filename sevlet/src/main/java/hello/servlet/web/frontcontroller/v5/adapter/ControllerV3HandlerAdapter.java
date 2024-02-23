@@ -11,7 +11,7 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-public class ContorollerV3HandlerAdapter implements MyHandlerAdapter {
+public class ControllerV3HandlerAdapter implements MyHandlerAdapter {
     @Override
     public boolean supports(Object handler) {
         //어뎁터로 연결하려는 인스턴스가 ControllerV3의 인터페이스에 해당하는지 검사
